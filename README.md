@@ -21,7 +21,8 @@ config.txt dosyasında belirtilen değerleri değiştirerek yeni bir content olu
 
 ### config.txt Dosyası
 Aşağıdaki değerleri config.txt dosyasında belirtmelisiniz:
-Film=
-Local=
-Content-Name=
-Type=
+
+- **Film=** 
+- **Local=**
+- **Content-Name=**
+- **Type=**
