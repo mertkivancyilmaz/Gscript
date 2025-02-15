@@ -3,20 +3,36 @@
 # data.txt dosyasını oku ve değişkenleri ayarla
 while IFS='=' read -r key value; do
     declare "$key"="$value"
-done < datanewcontent.txt
+done < config.txt
  
-# İlk POST isteği gönder ve yanıtı bir değişkene ata
-response=$(curl -X POST -H "Content-Type: application/json" \
--d '{
-    "contentType": "'"$Film"'",
-    "local": "'"$Local"'",
+# Contents değişkenini virgülle ayır ve diziye ata
+IFS=',' read -r -a contentNames <<< "$Contents"
+ 
+# Her bir contentName için POST isteği gönder
+for name in "${contentNames[@]}"; do
+    payload=$(cat <<EOF
+{
+    "contentType": "$Film",
+    "local": "$Local",
     "metadata": {
         "videoFormats": ["HD"],
-        "year": "'"$Year"'"
+        "year": 2024
     },
-    "name": "'"$ContentName"'",
+    "name": "$name",
     "type": "MOVIE"
-}' http://x.com/contents)
+}
+EOF
+    )
  
-# Yanıtı ekrana yazdır
-echo "Response: $response"
+    # Payload'ı ekrana yazdır
+    echo "Sending payload: $payload"
+ 
+    response=$(curl -X POST -H "Content-Type: application/json" \
+    -d "$payload" http://10.98.228.246:8090/contents)
+i
+    # Yanıtı ekrana yazdır
+    echo "Response for $name: $response"
+ 
+    # Bekleme süresi
+    sleep 1
+done

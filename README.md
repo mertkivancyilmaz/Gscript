@@ -11,7 +11,7 @@ Vx.y. basamaklarının anlamları aşağıdaki gibidir:
 
 ## Sürüm Geçmişi
 
-### Version 1.0
+### Version 1.1
 Bu versiyon geliştirmenin ilk versiyonudur. Sadece yeni bir content oluşturmak için kullanılabilir.
 config.txt dosyasında belirtilen değerleri değiştirerek yeni bir content oluşturabilirsiniz.
 
@@ -26,3 +26,13 @@ Aşağıdaki değerleri config.txt dosyasında belirtmelisiniz:
 - **Local=**
 - **Content-Name=**
 - **Type=**
+
+### Version 1.2
+Bu script v1 in üzerine ek olarak birden fazla contentin oluşturulabilmesini mümkün kılar
+
+config.txt dosyasında belirtilen değerler:
+
+- **Film=** 
+- **Local=(true or false)**
+- **Content-Name=content1,content2,content3, (contentleri virgülle ayırın)**
+- **Type=MOVIE**

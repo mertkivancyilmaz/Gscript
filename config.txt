@@ -1,6 +1,5 @@
-#Create New Content
+# Create New Content
 Film=
-Local=
-Content-Name=
-Type=
+Local=(true or false)
+Contents=
 Year=
