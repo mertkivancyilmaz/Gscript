@@ -28,7 +28,7 @@ Aşağıdaki değerleri config.txt dosyasında belirtmelisiniz:
 - **Type=**
 
 ### Version 1.2
-Bu script v1 in üzerine ek olarak birden fazla contentin oluşturulabilmesini mümkün kılar
+Bu script v1.1 in üzerine ek olarak birden fazla contentin oluşturulabilmesini mümkün kılar
 
 config.txt dosyasında belirtilen değerler:
 
@@ -36,3 +36,14 @@ config.txt dosyasında belirtilen değerler:
 - **Local=(true or false)**
 - **Content-Name=content1,content2,content3, (contentleri virgülle ayırın)**
 - **Type=MOVIE**
+
+### Version 1.3
+Bu script v1.2 in üzerine ek olarak oluşturulan contentlere lisans ekleyebiliyor.
+
+config.txt dosyasında belirtilen değerler:
+
+- **Film=** 
+- **Local=(true or false)**
+- **Content-Name=content1,content2,content3, (contentleri virgülle ayırın)**
+- **Type=MOVIE**
+- **LicenseId=**

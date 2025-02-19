@@ -1,6 +1,6 @@
 #!/bin/bash
  
-# data.txt dosyasını oku ve değişkenleri ayarla
+# config.txt dosyasını oku ve değişkenleri ayarla
 while IFS='=' read -r key value; do
     declare "$key"="$value"
 done < config.txt
@@ -9,29 +9,48 @@ done < config.txt
 IFS=',' read -r -a contentNames <<< "$Contents"
  
 # Her bir contentName için POST isteği gönder
-for name in "${contentNames[@]}"; do
-    payload=$(cat <<EOF
+for newContentName in "${contentNames[@]}"; do
+    create_content_payload=$(cat <<EOF
 {
     "contentType": "$Film",
     "local": "$Local",
     "metadata": {
         "videoFormats": ["HD"],
-        "year": 2024
+        "year": "$Year"
     },
-    "name": "$name",
+    "name": "$newContentName",
     "type": "MOVIE"
 }
 EOF
     )
  
     # Payload'ı ekrana yazdır
-    echo "Sending payload: $payload"
+    echo "Sending payload: $create_content_payload"
  
-    response=$(curl -X POST -H "Content-Type: application/json" \
-    -d "$payload" http://10.98.228.246:8090/contents)
-i
+    new_content_response=$(curl -X POST -H "Content-Type: application/json" \
+    -d "$create_content_payload" x/contents)
+ 
     # Yanıtı ekrana yazdır
-    echo "Response for $name: $response"
+    echo "Response for $newContentName: $new_content_response"
+ 
+    # 3 saniye bekleme süresi
+    sleep 3
+ 
+    # Ek adım: Yeni istek gönder
+    license_payload=$(cat <<EOF
+[
+    "$new_content_response"
+]
+EOF
+    )
+		 
+	  # Payload'ı ekrana yazdır
+    echo "Sending payload: $license_payload"
+ 
+    license_response=$(curl -X POST -H "Content-Type: application/json" \
+    -d "$license_payload" http://x/licenses/$LicenseId/contents/add)
+ 
+    echo "New response for $name: $license_response"
  
     # Bekleme süresi
     sleep 1
